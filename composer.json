@@ -10,6 +10,7 @@
         "doctrine/doctrine-bundle": "^2.18",
         "doctrine/doctrine-migrations-bundle": "^3.7",
         "doctrine/orm": "^3.5",
+        "google/apiclient": "^2.18",
         "phpdocumentor/reflection-docblock": "^5.6",
         "phpstan/phpdoc-parser": "^2.3",
         "symfony/asset": "7.3.*",
@@ -51,7 +52,8 @@
             "symfony/runtime": true
         },
         "bump-after-update": true,
-        "sort-packages": true
+        "sort-packages": true,
+        "process-timeout": 3000
     },
     "autoload": {
         "psr-4": {
