@@ -108,13 +108,14 @@ extension=openssl
 ;extension=pdo_odbc
 ;extension=pdo_pgsql
 ```
-
 # Environment variables
 The `.env` file is meant to be committed into the repository, and only holds dummy values.
 
 To override these values, create a `.env.local` file containing these items:
 ```env
-DATABASE_URL="mysql://USERNAME:PASSWORD@127.0.0.1:3306/app?serverVersion=11.4.9-MariaDB&charset=utf8mb4"
+DATABASE_URL="mysql://USERNAME:PASSWORD@127.0.0.1:3306/DATABASE_NAME?serverVersion=11.4.9-MariaDB&charset=utf8mb4"
 ```
+
+Remember to change `USERNAME`, `PASSWORD` and `DATABASE_NAME`.
 
 The app will override any values in `.env` if they are defined in `.env.local`.
