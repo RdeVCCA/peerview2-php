@@ -6,6 +6,7 @@ use App\Repository\CanvasPixelRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CanvasPixelRepository::class)]
+#[ORM\Table(name: 'canvas_pixels')]
 class CanvasPixel
 {
     #[ORM\Id]

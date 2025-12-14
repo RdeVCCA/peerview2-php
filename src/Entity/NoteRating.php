@@ -6,6 +6,7 @@ use App\Repository\NoteRatingRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: NoteRatingRepository::class)]
+#[ORM\Table(name: 'note_ratings')]
 class NoteRating
 {
     #[ORM\Id]
