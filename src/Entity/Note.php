@@ -59,7 +59,7 @@ class Note
     /**
      * @var Collection<int, Comment>
      */
-    #[ORM\OneToMany(targetEntity: Comment::class, mappedBy: 'noteId', orphanRemoval: true)]
+    #[ORM\OneToMany(targetEntity: Comment::class, mappedBy: 'note', orphanRemoval: true)]
     private Collection $comments;
 
     /**
@@ -269,7 +269,7 @@ class Note
     {
         if (!$this->comments->contains($comment)) {
             $this->comments->add($comment);
-            $comment->setNoteId($this);
+            $comment->setNote($this);
         }
 
         return $this;
@@ -279,8 +279,8 @@ class Note
     {
         if ($this->comments->removeElement($comment)) {
             // set the owning side to null (unless already changed)
-            if ($comment->getNoteId() === $this) {
-                $comment->setNoteId(null);
+            if ($comment->getNote() === $this) {
+                $comment->setNote(null);
             }
         }
 

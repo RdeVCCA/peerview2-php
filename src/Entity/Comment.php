@@ -21,7 +21,7 @@ class Comment
 
     #[ORM\ManyToOne(inversedBy: 'comments')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Note $noteId = null;
+    private ?Note $note = null;
 
     #[ORM\Column(type: Types::TEXT)]
     private ?string $comment = null;
@@ -55,14 +55,14 @@ class Comment
         return $this;
     }
 
-    public function getNoteId(): ?Note
+    public function getNote(): ?Note
     {
-        return $this->noteId;
+        return $this->note;
     }
 
-    public function setNoteId(?Note $noteId): static
+    public function setNote(?Note $note): static
     {
-        $this->noteId = $noteId;
+        $this->note = $note;
 
         return $this;
     }
