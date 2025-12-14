@@ -22,9 +22,6 @@ class User
     #[ORM\Column(length: 255)]
     private ?string $username = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $tag = null;
-
     #[ORM\Column]
     private ?int $points = null;
 
@@ -122,18 +119,6 @@ class User
     public function setUsername(string $username): static
     {
         $this->username = $username;
-
-        return $this;
-    }
-
-    public function getTag(): ?string
-    {
-        return $this->tag;
-    }
-
-    public function setTag(string $tag): static
-    {
-        $this->tag = $tag;
 
         return $this;
     }
