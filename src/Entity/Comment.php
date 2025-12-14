@@ -26,6 +26,9 @@ class Comment
     #[ORM\Column(type: Types::TEXT)]
     private ?string $comment = null;
 
+    #[ORM\Column]
+    private ?\DateTimeImmutable $timeCommented = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -63,6 +66,18 @@ class Comment
     public function setNote(?Note $note): static
     {
         $this->note = $note;
+
+        return $this;
+    }
+
+    public function getTimeCommented(): ?\DateTimeImmutable
+    {
+        return $this->timeCommented;
+    }
+
+    public function setTimeCommented(\DateTimeImmutable $timeCommented): static
+    {
+        $this->timeCommented = $timeCommented;
 
         return $this;
     }
