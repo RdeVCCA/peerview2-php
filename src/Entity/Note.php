@@ -72,7 +72,7 @@ class Note
      * @var Collection<int, NoteRating>
      */
     #[ORM\OneToMany(targetEntity: NoteRating::class, mappedBy: 'note', orphanRemoval: true)]
-    private Collection $noteRatings;
+    private Collection $ratings;
 
     #[ORM\Column(type: Types::SIMPLE_ARRAY, enumType: NoteSubject::class)]
     private array $subjects = [];
@@ -99,7 +99,7 @@ class Note
     {
         $this->comments = new ArrayCollection();
         $this->creators = new ArrayCollection();
-        $this->noteRatings = new ArrayCollection();
+        $this->ratings = new ArrayCollection();
         $this->readingLists = new ArrayCollection();
         $this->reports = new ArrayCollection();
         $this->messageThreads = new ArrayCollection();
@@ -317,27 +317,27 @@ class Note
     /**
      * @return Collection<int, NoteRating>
      */
-    public function getNoteRatings(): Collection
+    public function getRatings(): Collection
     {
-        return $this->noteRatings;
+        return $this->ratings;
     }
 
-    public function addNoteRating(NoteRating $noteRating): static
+    public function addRating(NoteRating $rating): static
     {
-        if (!$this->noteRatings->contains($noteRating)) {
-            $this->noteRatings->add($noteRating);
-            $noteRating->setNote($this);
+        if (!$this->ratings->contains($rating)) {
+            $this->ratings->add($rating);
+            $rating->setNote($this);
         }
 
         return $this;
     }
 
-    public function removeNoteRating(NoteRating $noteRating): static
+    public function removeRating(NoteRating $rating): static
     {
-        if ($this->noteRatings->removeElement($noteRating)) {
+        if ($this->ratings->removeElement($rating)) {
             // set the owning side to null (unless already changed)
-            if ($noteRating->getNote() === $this) {
-                $noteRating->setNote(null);
+            if ($rating->getNote() === $this) {
+                $rating->setNote(null);
             }
         }
 

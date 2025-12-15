@@ -18,7 +18,7 @@ class NoteRating
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
 
-    #[ORM\ManyToOne(inversedBy: 'noteRatings')]
+    #[ORM\ManyToOne(inversedBy: 'ratings')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Note $note = null;
 
