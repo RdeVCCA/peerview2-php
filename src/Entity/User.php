@@ -49,7 +49,7 @@ class User
     #[ORM\OneToMany(targetEntity: NoteRating::class, mappedBy: 'user', orphanRemoval: true)]
     private Collection $noteRatings;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $lastUploadTime = null;
 
     /**
@@ -171,7 +171,7 @@ class User
         return $this->lastUploadTime;
     }
 
-    public function setLastUploadTime(\DateTimeImmutable $lastUploadTime): static
+    public function setLastUploadTime(?\DateTimeImmutable $lastUploadTime): static
     {
         $this->lastUploadTime = $lastUploadTime;
 

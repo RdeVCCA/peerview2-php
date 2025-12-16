@@ -47,7 +47,7 @@ class Note
     #[ORM\Column]
     private ?bool $isFile = null;
 
-    #[ORM\Column(type: Types::INTEGER, enumType: NoteStatus::class)]
+    #[ORM\Column(length: 10, enumType: NoteStatus::class)]
     private ?NoteStatus $status = null;
 
     #[ORM\Column]

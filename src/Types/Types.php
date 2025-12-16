@@ -25,11 +25,11 @@ enum NoteYear: int
     case JC2 = 6;
 }
 
-enum NoteStatus: int
+enum NoteStatus: string
 {
-    case Planned = 1;
-    case Ongoing = 2;
-    case Completed = 3;
+    case Planned = 'Planned';
+    case Ongoing = 'Ongoing';
+    case Completed = 'Completed';
 }
 
 enum NoteSubject: string
