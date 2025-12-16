@@ -4,12 +4,12 @@
         <meta charset="UTF-8">
         <title>{% block title %}PeerView{% endblock %}</title>
         <link rel="icon" href="{{ asset('images/favicon.png') }}">
-        {% block stylesheets %}
         <link rel="stylesheet" href="{{ asset('styles/base.css') }}">
+        {% block stylesheets %}
         {% endblock %}
 
+        {% block importmap %}{{ importmap('app') }}{% endblock %}
         {% block javascripts %}
-            {% block importmap %}{{ importmap('app') }}{% endblock %}
         {% endblock %}
     </head>
     <body>

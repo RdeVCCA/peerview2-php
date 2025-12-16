@@ -1,7 +1,6 @@
 {% extends "base.html.twig" %}
 
 {% block stylesheets %}
-{{ parent() }}
 <link rel="stylesheet" href="{{ asset('styles/index.css') }}" />
 {% endblock %}
 
@@ -55,7 +54,7 @@
         </div>
         <div class="points-box">
             <h1>Fun</h1>
-            <p>Gather points to spend on <a href="/canvas">our pixel canvas</a>, draw as you please.</p>
+            <p>Gather points to spend on <a href="{{ url('canvas') }}">our pixel canvas</a>, draw as you please.</p>
         </div>
         <div class="points-box">
             <h1>Easy</h1>
@@ -73,6 +72,5 @@
 {% endblock %}
 
 {% block javascripts %}
-{{ parent() }}
 <script type="module">import "{{ asset('javascripts/index.js') }}";</script>
 {% endblock %}
