@@ -1,0 +1,109 @@
+#index #hero {
+    padding: 5vmin;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    background-image: linear-gradient(var(--gray) 0%, transparent 5%, transparent 100%), linear-gradient(to right, transparent 10%, var(--gray) 10.1%, transparent 10.2%, transparent 89.8%, var(--gray) 89.9%, transparent 90%);
+    background-size: 100% 5vmin;
+    background-repeat: repeat;
+}
+
+#index #hero #slogan {
+    text-align: center;
+    width: 80vmin;
+    font-size: max(6vmin, 24pt);
+    margin: 0;
+}
+
+#index #hero #logo {
+    padding: 5vmin;
+    width: 80vmin;
+}
+
+#index #notes-section {
+    background-color: var(--blue);
+}
+
+#index #notes-section h1,
+#index #notes-section p,
+#index #notes-section a {
+    color: white;
+}
+
+#index #notes-section #preview-select {
+    display: flex;
+}
+
+#index #notes-section #preview-select * {
+    padding: 5px;
+    color: white;
+    border: 1px solid white;
+}
+
+#index #notes-section #preview-select *:hover {
+    cursor: pointer;
+}
+
+#index #notes-section #preview-select .selected {
+    background-color: white;
+    color: var(--blue);
+}
+
+#index #notes-section #notes-table .notes {
+    background-color: white;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    row-gap: 1px;
+}
+
+#index #notes-section #notes-table .notes.hidden {
+    display: none;
+}
+
+#index #notes-section #notes-table .notes * {
+    padding: 10px;
+    background-color: var(--blue);
+    color: white;
+}
+
+@media screen and (max-width: 600px) {
+    #index #notes-section #notes-table .notes {
+        grid-template-columns: auto auto;
+    }
+
+    #index #notes-section #notes-table .notes *:nth-child(3n) {
+        display: none;
+    }
+}
+
+#index #points {
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+}
+
+#index #points .points-box {
+    background-color: white;
+    padding: 10px;
+    border: 2px dashed var(--gray);
+}
+
+#index footer {
+    background-color: var(--blue);
+    padding: 20px;
+}
+
+#index footer a {
+    color: white;
+}
+
+#index footer #footer-content {
+    color: white;
+}
+
+#index footer #footer-content * {
+    display: block;
+    text-align: center;
+}

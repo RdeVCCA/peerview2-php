@@ -1,20 +1,74 @@
-{% extends 'base.html.twig' %}
+{% extends "base.html.twig" %}
 
-{% block title %}Hello IndexController!{% endblock %}
+{% block stylesheets %}
+{{ parent() }}
+<link rel="stylesheet" href="{{ asset('styles/index.css') }}" />
+{% endblock %}
 
-{% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>C:/Users/user/Documents/GitHub/peerview2-php/src/Controller/IndexController.php</code></li>
-        <li>Your template at <code>C:/Users/user/Documents/GitHub/peerview2-php/templates/index/index.html.twig</code></li>
-    </ul>
+{% block content %}
+<div id="index">
+<section id="hero">
+    <img id="logo" src="{{ asset('images/logo.svg') }}" alt="Logo" />
+    <h1 id="slogan">RdeV's own platform for sharing study notes.</h1>
+</section>
+<section id="notes-section">
+    <h1>Join {{ users }}+ users making {{ notes }}+ notes </h1>
+    <div id="preview-select">
+    <div id="top-notes-button" class="selected">Top</div>
+    <div id="newest-notes-button">New</div>
+    </div>
+    <div id="notes-table">
+    <div id="top-notes" class="notes">
+        <div>Visits</div>
+        <div>Title</div>
+        <div>Description</div>
+        {% for note in top_notes %}
+        <div>{{ note.visits }}</div>
+        <div>{{ note.title }}</div>
+        <div>{{ note.description }}</div>
+        {% endfor %}
+    </div>
+    <div id="newest-notes" class="notes hidden">
+        <div>Upload time</div>
+        <div>Title</div>
+        <div>Description</div>
+        {% for note in newest_notes %}
+        <div>{{ note.timeCreated|format_datetime('short') }}</div>
+        <div>{{ note.title }}</div>
+        <div>{{ note.description }}</div>
+        {% endfor %}
+    </div>
+    </div>
+</section>
+<section id="points">
+    <div class="points-box">
+    <h1>Customizable</h1>
+    <p>Select topics to focus on, create reading lists, PeerView will remember them all.</p>
+    </div>
+    <div class="points-box">
+    <h1>Powerful</h1>
+    <p>Support for over 10 different file formats and 10 sites; navigate them all with the powerful sorting system.</p>
+    </div>
+    <div class="points-box">
+    <h1>Fun</h1>
+    <p>Gather points to spend on <a href="/canvas">our pixel canvas</a>, draw as you please.</p>
+    </div>
+    <div class="points-box">
+    <h1>Easy</h1>
+    <p>Simply login with your ICON email to get started.</p>
+    </div>
+</section>
+<footer>
+    <div id="footer-content">
+    <p>Created by RV, for RV.</p>
+    <a href="mailto:rdevcca@gmail.com">rdevcca@gmail.com</a>
+    <a href="https://rdev.x10.mx/">rdev.x10.mx</a>
+    </div>
+</footer>
 </div>
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+<script type="module">import "{{ asset('javascripts/index.js') }}";</script>
 {% endblock %}

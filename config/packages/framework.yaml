@@ -8,6 +8,8 @@ framework:
     #esi: true
     #fragments: true
 
+    default_locale: 'en_SG'
+
 when@test:
     framework:
         test: true

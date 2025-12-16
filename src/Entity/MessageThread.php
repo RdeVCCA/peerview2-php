@@ -3,11 +3,15 @@
 namespace App\Entity;
 
 use App\Repository\MessageThreadRepository;
-use App\Types\MessageThreadType;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+
+enum MessageThreadType: string
+{
+    case CollaborationRequest = 'CollaborationRequest';
+    case CommentAlert = 'CommentAlert';
+}
 
 #[ORM\Entity(repositoryClass: MessageThreadRepository::class)]
 #[ORM\Table(name: 'message_threads')]

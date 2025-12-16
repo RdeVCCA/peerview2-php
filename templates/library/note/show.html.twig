@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+<div>
+    {#
+        Twig will scan through getXXX() functions
+        to find the appropriate getter for our property.
+    #}
+    <h1>{{ note.title|e }}</h1>
+    <a href={{ note.link }}>{{ note.link }}</a>
+    <h2>Description</h2>
+    <p>{{ note.description|e }}</p>
+    <h2>{{ note.comments|length }} comments</h2>
+    <ol>
+        {% for comment in note.comments %}
+        <li>
+            <p>{{ comment.comment|e }}</p>
+            <p>by {{ comment.user.username|e }} on {{ comment.timeCommented|format_datetime('short') }}</p>
+        </li>
+        {% endfor %}
+    <ol>
+</div>
+{% endblock %}
