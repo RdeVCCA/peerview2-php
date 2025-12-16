@@ -1,0 +1,15 @@
+#canvas #grid {
+  outline: 2px solid black;
+  display: grid;
+  grid-template-rows: repeat(50, 1fr);
+  grid-template-columns: repeat(50, 1fr);
+}
+
+#canvas #grid .pixel {
+  background-color: white;
+  aspect-ratio: 1;
+}
+
+#canvas #grid .pixel:hover {
+  border: 1px solid black;
+}

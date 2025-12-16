@@ -7,11 +7,10 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use App\Repository\NoteRepository;
 use App\Repository\UserRepository;
-use App\Entity\Note;
 
 final class IndexController extends AbstractController
 {
-    #[Route('/', name: 'app_index')]
+    #[Route('/', name: 'index')]
     public function index(NoteRepository $noteRepository, UserRepository $userRepository): Response
     {
         $numUsers = $userRepository->count();
@@ -30,10 +29,10 @@ final class IndexController extends AbstractController
             ->getArrayResult();
 
         return $this->render('index/index.html.twig', [
-            'users' => $numUsers,
-            'notes' => $numNotes,
-            'top_notes' => $topNotes,
-            'newest_notes' => $newestNotes,
+            'userCount' => $numUsers,
+            'noteCount' => $numNotes,
+            'topNotes' => $topNotes,
+            'newestNotes' => $newestNotes,
         ]);
     }
 }

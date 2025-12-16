@@ -1,0 +1,32 @@
+{% extends "base.html.twig" %}
+
+{% block stylesheets %}
+{{ parent() }}
+<link rel="stylesheet" href="{{ asset('styles/canvas.css') }}"/>
+{% endblock %}
+
+{% block content %}
+<section id="canvas" class="content">
+    <h1>Canvas preview</h1>
+    <p>Click on any pixel to see who drew it.</p>
+    <p id="drawn-by">This pixel was drawn by ...</p>
+    <div id="grid">
+        {% for pixel in pixels %}
+        {% if pixel['isFilled'] %}
+        <div
+            class="pixel"
+            style="background-color: {{ pixel.colour }}"
+            data-user="{{ pixel.username }}"
+        ></div>
+        {% else %}
+        <div class="pixel"></div>
+        {% endif %}
+
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}
+
+{% block javascripts %}
+<script type="module">import "{{ asset('javascripts/canvas.js') }}";</script>
+{% endblock %}
