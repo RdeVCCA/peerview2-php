@@ -129,7 +129,7 @@ class Note
      * @var Collection<int, User>
      */
     #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'createdNotes')]
-    private Collection $creators;
+    private Collection $authors;
 
     /**
      * @var Collection<int, NoteRating>
@@ -341,25 +341,25 @@ class Note
     /**
      * @return Collection<int, User>
      */
-    public function getCreators(): Collection
+    public function getAuthors(): Collection
     {
-        return $this->creators;
+        return $this->authors;
     }
 
-    public function addCreator(User $creator): static
+    public function addAuthor(User $author): static
     {
-        if (!$this->creators->contains($creator)) {
-            $this->creators->add($creator);
-            $creator->addCreatedNote($this);
+        if (!$this->authors->contains($author)) {
+            $this->authors->add($author);
+            $author->addCreatedNote($this);
         }
 
         return $this;
     }
 
-    public function removeCreator(User $creator): static
+    public function removeCreator(User $author): static
     {
-        if ($this->creators->removeElement($creator)) {
-            $creator->removeCreatedNote($this);
+        if ($this->authors->removeElement($author)) {
+            $author->removeCreatedNote($this);
         }
 
         return $this;

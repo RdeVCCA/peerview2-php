@@ -40,7 +40,7 @@ class User
     /**
      * @var Collection<int, Note>
      */
-    #[ORM\ManyToMany(targetEntity: Note::class, inversedBy: 'creators')]
+    #[ORM\ManyToMany(targetEntity: Note::class, inversedBy: 'authors')]
     private Collection $createdNotes;
 
     /**
