@@ -4,7 +4,7 @@
 <div>
     {% for note in notes %}
     <div>
-        <a href="{{ path('note_preview', {'noteId': note.id}) }}"><h1>{{ note.title|e }}</h1></a>
+        <a href="{{ path('note_preview', {'id': note.id}) }}"><h1>{{ note.title|e }}</h1></a>
         <p>by {{ note.authors|map(author => author.username)|join(', ') }}</p>
         <p>{{ note.description|e }}</p>
     </div>

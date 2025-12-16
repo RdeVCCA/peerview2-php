@@ -10,6 +10,11 @@
     <a href={{ note.link }}>{{ note.link }}</a>
     <h2>Description</h2>
     <p>{{ note.description|e }}</p>
+    {% if note.ratings|length == 0 %}
+    <p>Nobody has rated this note yet.</p>
+    {% else %}
+    <p>{{ note.ratings|length }} people have rated this note a {{ rating }}/5.</p>
+    {% endif %}
     <h2>{{ note.comments|length }} comments</h2>
     <ol>
         {% for comment in note.comments %}

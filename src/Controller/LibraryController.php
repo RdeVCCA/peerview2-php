@@ -5,6 +5,7 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use App\Entity\Note;
 use App\Repository\NoteRepository;
 
 #[Route('/library')]
@@ -22,26 +23,30 @@ final class LibraryController extends AbstractController
             ]
         );
     }
-    #[Route('/{noteId}', name: 'note_preview', methods: ['GET', 'POST'])]
-    public function preview($noteId, NoteRepository $noteRepository): Response
+    #[Route('/{id<\d+>}', name: 'note_preview', methods: ['GET', 'POST'])]
+    public function preview(Note $note): Response
     {
-        $note = $noteRepository->find($noteId);
-        if ($note === null) {
-            throw $this->createNotFoundException('Note not found');
+        $ratings = $note->getRatings()->toArray();
+
+        $totalRating = 0;
+        foreach ($ratings as $rating) {
+            $totalRating += $rating->getRating();
         }
+
+        $averageRating = count($ratings) === 0 ? 0 : $totalRating / count($ratings);
         
         return $this->render(
             'library/note/show.html.twig', 
             [
-                'note' => $note
+                'note' => $note,
+                'rating' => $averageRating,
             ]
         );
     }
 
-    #[Route('/{noteId}/redirect', name: 'note_redirect', methods: ['GET', 'POST'])]
-    public function redirectUrl($noteId, NoteRepository $noteRepository): Response
+    #[Route('/{id<\d+>}/redirect', name: 'note_redirect', methods: ['GET', 'POST'])]
+    public function redirectUrl(Note $note): Response
     {
-        $note = $noteRepository->find($noteId);
         return $this->redirect($note->getLink());
     }
 }
