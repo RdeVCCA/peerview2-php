@@ -1,7 +1,9 @@
 {% for note in notes %}
-<div>
-    <a href="{{ path('note_preview', {'id': note.id}) }}"><h1>{{ note.title|e }}</h1></a>
-    <p>by {{ note.username|join(', ') }}</p>
+<div class="note-entry">
+    <a href="{{ path('note_preview', {'id': note.id}) }}">
+        <span class="title">{{ note.title|e }}</span>
+    </a>
     <p>{{ note.description|e }}</p>
+    <p><span>{{ ux_icon('lucide:user') }}</span> {{ note.username|join(', ') }}</p>
 </div>
 {% endfor %}

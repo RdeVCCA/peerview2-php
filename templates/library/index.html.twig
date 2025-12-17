@@ -1,15 +1,21 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+<link rel="stylesheet" href="{{ asset('styles/library.css') }}">
+{% endblock %}
+
 {% block content %}
-<div>
-    {% include "library/_note_list.html.twig" %}
-</div>
-<div id="note-loader">
-    {#
-        doesn't actually load notes,
-        but when it shows up on screen
-        library.js will load more notes
-    #}
+<div id="library">
+    <section id="note-entries">
+        {% include "library/_note_list.html.twig" %}
+    </section>
+    <div id="note-loader">
+        {#
+            doesn't actually load notes,
+            but when it shows up on screen
+            library.js will load more notes
+        #}
+    </div>
 </div>
 {% endblock %}
 

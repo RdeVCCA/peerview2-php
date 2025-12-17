@@ -22,7 +22,7 @@ const observer = new IntersectionObserver(async (entries, observer) => {
         return;
     }
 
-    document.querySelector("#containing>div").insertAdjacentHTML("beforeend", html)
+    document.querySelector("#note-entries").insertAdjacentHTML("beforeend", html)
     loading = false;
 });
 

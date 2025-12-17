@@ -1,0 +1,14 @@
+#library #note-entries {
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+}
+
+#library #note-entries .note-entry {
+    padding: 10px;
+    border: 2px dashed var(--gray);
+}
+
+#library #note-entries .note-entry .title {
+    font-weight: bold;
+}
