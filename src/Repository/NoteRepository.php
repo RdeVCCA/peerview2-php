@@ -5,6 +5,9 @@ namespace App\Repository;
 use App\Entity\Note;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\Query;
+use Doctrine\ORM\Tools\Pagination\Paginator;
+use Doctrine\ORM\Tools\Pagination\CountWalker;
 
 /**
  * @extends ServiceEntityRepository<Note>
@@ -16,28 +19,15 @@ class NoteRepository extends ServiceEntityRepository
         parent::__construct($registry, Note::class);
     }
 
-//    /**
-//     * @return Note[] Returns an array of Note objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('n')
-//            ->andWhere('n.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('n.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
-
-//    public function findOneBySomeField($value): ?Note
-//    {
-//        return $this->createQueryBuilder('n')
-//            ->andWhere('n.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    public function paginate(Query $query, int $pageNumber = 0, int $pageSize = 20): Paginator
+    {
+        $paginator = new Paginator($query);
+        $paginator
+            ->setUseOutputWalkers(false)
+            ->getQuery()
+            ->setFirstResult($pageNumber * $pageSize)
+            ->setMaxResults($pageSize)
+        ;
+        return $paginator;
+    }
 }

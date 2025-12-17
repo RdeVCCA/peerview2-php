@@ -2,12 +2,17 @@
 
 {% block content %}
 <div>
-    {% for note in notes %}
-    <div>
-        <a href="{{ path('note_preview', {'id': note.id}) }}"><h1>{{ note.title|e }}</h1></a>
-        <p>by {{ note.authors|map(author => author.username)|join(', ') }}</p>
-        <p>{{ note.description|e }}</p>
-    </div>
-    {% endfor %}
+    {% include "library/_note_list.html.twig" %}
 </div>
+<div id="note-loader">
+    {#
+        doesn't actually load notes,
+        but when it shows up on screen
+        library.js will load more notes
+    #}
+</div>
+{% endblock %}
+
+{% block javascripts %}
+<script type="module">import "{{ asset('javascripts/library.js') }}";</script>
 {% endblock %}

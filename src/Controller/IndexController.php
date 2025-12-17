@@ -20,13 +20,15 @@ final class IndexController extends AbstractController
             ->orderBy('n.visits', 'DESC')
             ->setMaxResults(5)
             ->getQuery()
-            ->getArrayResult();
+            ->getArrayResult()
+        ;
         
         $newestNotes = $noteRepository->createQueryBuilder('n')
             ->orderBy('n.timeCreated', 'DESC')
             ->setMaxResults(5)
             ->getQuery()
-            ->getArrayResult();
+            ->getArrayResult()
+        ;
 
         return $this->render('index/index.html.twig', [
             'userCount' => $numUsers,
