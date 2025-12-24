@@ -7,6 +7,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - name: Remove unneeded files
+        run: |
+          rm -rf .git .github
+          rm .editorconfig .gitignore README.md
       - name: List files in ./
         run: |
           ls -a
