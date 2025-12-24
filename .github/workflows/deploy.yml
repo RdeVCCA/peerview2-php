@@ -1,0 +1,17 @@
+name: Compile and deploy to server
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: List files in ./
+        run: |
+          ls -a
+      - name: Copy files to remote
+        run: |
+          mkdir -v -m 700 $HOME/.ssh
+          ssh-keyscan -H ${{ secrets.SSH_HOST }} > $HOME/.ssh/known_hosts
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > $HOME/.ssh/id_ed25519
+          chmod 400 $HOME/.ssh/id_ed25519
+          scp -i $HOME/.ssh/id_ed25519 -r . ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }}:${{ secrets.SSH_SERVER_DEPLOYMENT_PATH }}
