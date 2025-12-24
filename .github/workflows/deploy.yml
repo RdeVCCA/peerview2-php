@@ -1,4 +1,5 @@
 name: Compile and deploy to server
+on: workflow-dispatch
 
 jobs:
   deploy:
