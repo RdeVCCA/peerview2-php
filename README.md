@@ -1,7 +1,7 @@
 # Windows Setup
 
 ## PHP
-Install PHP from https://www.php.net/downloads.php?usage=web&os=windows&osvariant=windows-native&version=8.2.
+Install PHP from https://www.php.net/downloads.php?usage=web&os=windows&osvariant=windows-native&version=8.4.
 
 The link will bring you to a page with a single line command. Run it in PowerShell, then close and open your shell. PHP should be installed.
 Check by typing `php --version` into your shell.
