@@ -1,5 +1,5 @@
 name: Compile and deploy to server
-on: workflow-dispatch
+on: workflow_dispatch
 
 jobs:
   deploy:
