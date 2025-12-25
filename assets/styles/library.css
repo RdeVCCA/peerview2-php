@@ -12,3 +12,7 @@
 #library #note-entries .note-entry .title {
     font-weight: bold;
 }
+
+#library #note-loader {
+    height: 1px;
+}
