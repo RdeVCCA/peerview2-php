@@ -21,3 +21,9 @@ jobs:
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > $HOME/.ssh/id_ed25519
           chmod 400 $HOME/.ssh/id_ed25519
           scp -i $HOME/.ssh/id_ed25519 -r . ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }}:${{ secrets.SSH_SERVER_DEPLOYMENT_PATH }}
+      - name: Clear cache
+        run: |
+          ssh -t ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} "cd ${{ secrets.SSH_SERVER_DEPLOYMENT_PATH }}; php bin/console cache:clear"
+      - name: Remake asset map
+        run: |
+          ssh -t ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} "cd ${{ secrets.SSH_SERVER_DEPLOYMENT_PATH }}; php bin/console asset-map:compile"
