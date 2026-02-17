@@ -1,5 +1,6 @@
 alert("This is a test version of PeerView and has no functionality.\nPlease go to peerview.x10.mx to use PeerView.");
 
+// note preview section
 const topButton = document.querySelector("#top-notes-button");
 const newestButton = document.querySelector("#newest-notes-button");
 const topNotes = document.querySelector("#top-notes");

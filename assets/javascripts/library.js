@@ -1,3 +1,4 @@
+// autoload new notes
 let lastLoadedPage = 0;
 let loading = false;
 
@@ -23,7 +24,27 @@ const observer = new IntersectionObserver(async (entries, observer) => {
     }
 
     document.querySelector("#note-entries").insertAdjacentHTML("beforeend", html)
+    hookExpanderButtonsToViews();
     loading = false;
 });
 
 observer.observe(loader);
+
+function hookExpanderButtonsToViews() {
+    // connects expander button's click event to the class toggle
+    const noteEntries = document.querySelectorAll("#library .note-entry");
+    for (const entry of noteEntries) {
+        const expander = entry.querySelector(".expander");
+        if (expander.hasAttribute("listening")) {
+            // skip already connected expanders
+            continue;
+        }
+
+        expander.setAttribute("listening", "true");
+        expander.addEventListener("click", function () {
+            entry.classList.toggle("collapsed");
+        });
+    }
+}
+
+hookExpanderButtonsToViews();

@@ -1,10 +1,10 @@
 # Windows Setup
 
 ## PHP
-Install PHP from https://www.php.net/downloads.php?usage=web&os=windows&osvariant=windows-native&version=8.4.
+Install PHP from https://www.php.net/downloads.php?usage=web&os=windows&osvariant=windows-native&version=8.4&multiversion=Y.
 
 The link will bring you to a page with a single line command. Run it in PowerShell, then close and open your shell. PHP should be installed.
-Check by typing `php --version` into your shell.
+Check by typing `php -v` into your shell.
 
 ## MariaDB
 Install MariaDB from https://dlm.mariadb.com/4500722/MariaDB/mariadb-11.4.9/winx64-packages/mariadb-11.4.9-winx64.msi.
@@ -28,86 +28,62 @@ https://github.com/symfony-cli/symfony-cli/releases/download/v5.16.1/symfony-cli
 and move it into your PATH.
 
 ### `check:requirements`
-Now run `symfony check:requirements`. For a fresh PHP install, you might get these recommendations to "improve your setup":
+For a fresh PHP install, you will need to change these settings in the `php.ini` file,
+which can be found in the same folder as the `php.exe` you're currently using:
 
-#### `intl` extension
-```
- * intl extension should be available
-   > Install and enable the intl extension (used for validators).
-```
+#### Extensions
+Enable the following extensions by uncommenting the lines:
+- `curl`
+- `intl`
+- `mbstring`
+- `mysqli`
+- `openssl`
+- `pdo_mysql`
 
-Go to your `php.ini` file (by default located at `C:\Program Files\php-8.2.28-Win32-vs16-x64`),
-and enable the `intl` extension by uncommenting this line (line 935 by default):
+From line 918:
 ```diff
+;extension=bz2
+-;extension=curl
++extension=curl
+;extension=ffi
+;extension=ftp
+;extension=fileinfo
 ;extension=gd
 ;extension=gettext
 ;extension=gmp
 -;extension=intl
 +extension=intl
-;extension=imap
-extension=mbstring
+;extension=ldap
+-;extension=mbstring
++extension=mbstring
 ;extension=exif      ; Must be after mbstring as it depends on it
-```
-
-#### PHP accelerator
-```
- * a PHP accelerator should be installed
-   > Install and/or enable a PHP accelerator (highly recommended).
-```
-
-A PHP accelerator is a program that speeds up PHP applications. (https://en.wikipedia.org/wiki/PHP_accelerator)
-
-OPcache, a PHP accelerator, comes built-in with the default PHP installation, but it is not enabled by default.
-To enable it, find this line (line 965 by default) in `php.ini` and uncomment it.
-```diff
-;extension=soap
-;extension=sockets
-;extension=sodium
-;extension=sqlite3
-;extension=tidy
-;extension=xsl
-;extension=zip
-
--;zend_extension=opcache
-+zend_extension=opcache
+-;extension=mysqli
++extension=mysqli
+;extension=odbc
+-;extension=openssl
++extension=openssl
+;extension=pdo_firebird
+-;extension=pdo_mysql
++extension=pdo_mysql
+;extension=pdo_odbc
+;extension=pdo_pgsql
+;extension=pdo_sqlite
+;extension=pgsql
+;extension=shmop
 ```
 
 #### `realpath_cache_size`
-```
- * realpath_cache_size should be at least 5M in php.ini
-   > Setting "realpath_cache_size" to e.g. "5242880" or "5M" in
-   > php.ini* may improve performance on Windows significantly in some
-   > cases.
-```
-Simply do what it says. In your `php.ini` file, find the relevant line (line 351 by default)
-and change the size:
+Set this option to at least 5 megabytes (`5M`) at line 351:
 ```diff
 ; Determines the size of the realpath cache to be used by PHP. This value should
 ; be increased on systems where PHP opens many files to reflect the quantity of
 ; the file operations performed.
 ; Note: if open_basedir is set, the cache is disabled
 ; https://php.net/realpath-cache-size
--;realpath_cache_size = 4096k
+-realpath_cache_size = 4096k
 +realpath_cache_size = 5M
 ```
 
-#### PDO
-```
- * PDO should have some drivers installed (currently available: none)
-   > Install PDO drivers (mandatory for Doctrine).
-```
-
-Enable the `pdo_mysql` extension (line 945):
-```diff
-;extension=odbc
-extension=openssl
-;extension=pdo_firebird
--;extension=pdo_mysql
-+extension=pdo_mysql
-;extension=pdo_oci
-;extension=pdo_odbc
-;extension=pdo_pgsql
-```
 # Environment variables
 The `.env` file is meant to be committed into the repository, and only holds dummy values.
 

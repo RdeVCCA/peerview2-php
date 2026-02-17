@@ -18,10 +18,15 @@ final class LibraryController extends AbstractController
         $pageNumber = $request->query->getInt('pageNumber', 0);
 
         $query = $noteRepository->createQueryBuilder('n')
-            ->leftJoin('n.authors', 'u')
+            ->leftJoin('n.authors', 'a')
+            ->leftJoin('n.comments', 'c')
+            ->leftJoin('n.ratings', 'r')
+            ->groupBy('n.id')
             ->orderBy('n.id', 'ASC')
-            ->select('n.id', 'n.title', 'n.description', 'u.username')
-            ->getQuery()
+            ->select(
+                'n.id', 'n.title', 'n.description', 'n.timeCreated', 'n.isFile', 'n.link',
+                'a.username', 'COUNT(DISTINCT c.id) AS commentCount', 'COUNT(DISTINCT r.id) AS ratingCount', 'AVG(r.rating) AS rating'
+            )
         ;
 
         $notes = $noteRepository->paginate($query, $pageNumber);

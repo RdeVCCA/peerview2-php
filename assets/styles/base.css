@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap');
 
 :root {
-    --red: #dada5e;
+    --red: #da5e5e;
     --blue: #697dd9;
     --light-red: #f8e0e0;
     --light-blue: #e1e5f7;
@@ -56,6 +56,10 @@ section {
     padding: 20px max(20px, 50% - 600px);
 }
 
+th {
+    font-weight: bold;
+}
+
 /* topbar items */
 #topbar {
     width: 100%;
@@ -74,17 +78,17 @@ section {
     pointer-events: all;
 }
 
-#menu {
+#topbar #navigation-menu-button {
     height: 2rem;
     aspect-ratio: 1 / 1;
 }
 
-#menu>img {
+#topbar #navigation-menu-button img {
     /* use display: block so line-height does not affect size */
     display: block;
 }
 
-#login {
+#topbar #login {
     background-color: white;
     border: 2px solid black;
     padding: 0 2rem;
@@ -92,4 +96,74 @@ section {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+@keyframes navigation-menu-open {
+    from { top: -100%; }
+    to { top: 0%; }
+}
+
+@keyframes navigation-menu-close {
+    from { top: 0%; }
+    to { top: -100%; }
+}
+
+@keyframes navigation-menu-shadow-open {
+    from { opacity: 0; }
+    to { opacity: 20%; }
+}
+
+@keyframes navigation-menu-shadow-close {
+    from { opacity: 20%; }
+    to { opacity: 0; }
+}
+
+#navigation-menu {
+    padding: 4rem;
+    width: 100%;
+    position: fixed;
+    top: -100%;
+    background-color: white;
+    z-index: 2;
+}
+
+#navigation-menu.opened {
+    animation: navigation-menu-open 0.2s 1;
+    top: 0%;
+}
+
+#navigation-menu.closed {
+    animation: navigation-menu-close 0.2s 1;
+}
+
+#navigation-menu-shadow {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #000000;
+    opacity: 0;
+    z-index: 1;
+    pointer-events: none;
+}
+
+#navigation-menu-shadow.opened {
+    opacity: 20%;
+    pointer-events: all;
+    animation: navigation-menu-shadow-open 0.2s 1;
+}
+
+#navigation-menu-shadow.closed {
+    opacity: 0;
+    animation: navigation-menu-shadow-close 0.2s 1;
+}
+
+#navigation-menu table {
+    width: 100%;
+}
+
+#navigation-menu table td {
+    text-align: center;
 }

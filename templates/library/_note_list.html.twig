@@ -1,9 +1,94 @@
 {% for note in notes %}
-<div class="note-entry">
-    <a href="{{ path('note_preview', {'id': note.id}) }}">
-        <span class="title">{{ note.title|e }}</span>
-    </a>
-    <p>{{ note.description|e }}</p>
-    <p><span>{{ ux_icon('lucide:user') }}</span> {{ note.username|join(', ') }}</p>
+<div class="note-entry collapsed">
+    <div class="title-row">
+        <a href="{{ path('note_preview', {'id': note.id}) }}">
+            <h2 class="title">{{ note.title|e }} {{ ux_icon('lucide:link') }}</h2>
+        </a>
+        <button class="expander">{{ ux_icon('lucide:chevron-down') }}</button>
+    </div>
+    <!-- tags -->
+    <p class="description">{{ note.description|e }}</p>
+    <hr>
+    <div class="details">
+        {% if note.username|length == 0 %}
+        {{ ux_icon('lucide:user') }} <i>(none)</i>
+        {% else %}
+        {{ ux_icon('lucide:user') }} {{ note.username|join(', ') }}
+        {% endif %}
+
+        <div class="short-detail">
+            {% if note.rating is null %}
+            {% else %}
+            {{ ux_icon('lucide:star') }} {{ note.rating|round(2) }}/5
+            {% endif %}
+        </div>
+
+        <div class="long-detail">
+            {% if note.rating is null %}
+            {{ ux_icon('lucide:star') }} <i>(none)</i>
+            {% elseif note.ratingCount == 1 %}
+            {{ ux_icon('lucide:star') }} {{ note.rating|round(2) }}/5 (1 rating)
+            {% else %}
+            {{ ux_icon('lucide:star') }} {{ note.rating|round(2) }}/5 ({{ note.ratingCount }} ratings)
+            {% endif %}
+        </div>
+
+        <div class="short-detail">
+            {{ ux_icon('lucide:message-square-text') }} {{ note.commentCount }}
+        </div>
+
+        <div class="long-detail">
+            {% if note.commentCount == 1 %}
+            {{ ux_icon('lucide:message-square-text') }} 1 comment
+            {% else %}
+            {{ ux_icon('lucide:message-square-text') }} {{ note.commentCount }} comments
+            {% endif %}
+        </div>
+
+        <div class="short-detail">
+            {{ ux_icon('lucide:calendar-clock') }} {{ note.timeCreated|format_date('short') }}
+        </div>
+
+        <div class="long-detail">
+            {{ ux_icon('lucide:calendar-clock') }} {{ note.timeCreated|format_datetime('short') }}
+        </div>
+
+        {% if note.isFile %}
+        {{ ux_icon('lucide:circle-question-mark') }} File
+        {% else %}
+        {{ ux_icon('lucide:circle-question-mark') }} Website
+        {% endif %}
+    </div>
+    <hr>
+    <div class="actions">
+        <div class="rating-buttons">
+            Rate:
+            <label><input type="radio" name="rating-{{ note.id }}">1</label>
+            <label><input type="radio" name="rating-{{ note.id }}">2</label>
+            <label><input type="radio" name="rating-{{ note.id }}">3</label>
+            <label><input type="radio" name="rating-{{ note.id }}">4</label>
+            <label><input type="radio" name="rating-{{ note.id }}">5</label>
+            /5
+        </div>
+        <div class="action-buttons">
+            <button class="add-to-reading-list">
+                {{ ux_icon('lucide:heart') }}
+                <span>Add to reading list</span>
+            </button>
+            <button class="comment">
+                {{ ux_icon('lucide:message-square-text') }}
+                <span>Comment</span>
+            </button>
+            <button class="collaborate">
+                {{ ux_icon('lucide:users') }}
+                <span>Request to collaborate</span>
+            </button>
+            <button class="report">
+                {{ ux_icon('lucide:flag') }}
+                <span>Report</span>
+            </button>
+        </div>
+    </div>
+
 </div>
 {% endfor %}

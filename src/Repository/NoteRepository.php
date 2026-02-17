@@ -6,6 +6,7 @@ use App\Entity\Note;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\Query;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\ORM\Tools\Pagination\CountWalker;
 
@@ -19,7 +20,7 @@ class NoteRepository extends ServiceEntityRepository
         parent::__construct($registry, Note::class);
     }
 
-    public function paginate(Query $query, int $pageNumber = 0, int $pageSize = 20): Paginator
+    public function paginate(QueryBuilder $query, int $pageNumber = 0, int $pageSize = 20): Paginator
     {
         $paginator = new Paginator($query);
         $paginator
