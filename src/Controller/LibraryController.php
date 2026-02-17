@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use finfo;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -25,11 +26,25 @@ final class LibraryController extends AbstractController
             ->orderBy('n.id', 'ASC')
             ->select(
                 'n.id', 'n.title', 'n.description', 'n.timeCreated', 'n.isFile', 'n.link',
-                'a.username', 'COUNT(DISTINCT c.id) AS commentCount', 'COUNT(DISTINCT r.id) AS ratingCount', 'AVG(r.rating) AS rating'
+                'a.username', 'COUNT(a.id) AS authorCount', 'COUNT(DISTINCT c.id) AS commentCount', 'COUNT(DISTINCT r.id) AS ratingCount', 'AVG(r.rating) AS rating'
             )
         ;
 
-        $notes = $noteRepository->paginate($query, $pageNumber);
+        $notes = iterator_to_array($noteRepository->paginate($query, $pageNumber));
+        foreach ($notes as $idx => $note) {
+            if ($note['isFile']) {
+                // determine file type
+                // code is currently broken as we have yet to determine filesystem structure
+                // $finfo = finfo_open(FILEINFO_NONE);
+                // $fileType = finfo_file($finfo, $note['link']);
+                // finfo_close($finfo);
+                // $notes[$idx]['fileType'] = $fileType;
+                $notes[$idx]['fileType'] = 'placeholder filetype';
+            } else {
+                // determine website domain
+                $notes[$idx]['hostName'] = parse_url($note['link'], PHP_URL_HOST);
+            }
+        }
 
         if ($request->isXmlHttpRequest()) {
             return $this->render(

@@ -34,6 +34,7 @@ which can be found in the same folder as the `php.exe` you're currently using:
 #### Extensions
 Enable the following extensions by uncommenting the lines:
 - `curl`
+- `fileinfo`
 - `intl`
 - `mbstring`
 - `mysqli`
@@ -47,7 +48,8 @@ From line 918:
 +extension=curl
 ;extension=ffi
 ;extension=ftp
-;extension=fileinfo
+-;extension=fileinfo
++extension=fileinfo
 ;extension=gd
 ;extension=gettext
 ;extension=gmp

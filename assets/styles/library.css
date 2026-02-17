@@ -27,6 +27,22 @@
     border: none;
 }
 
+#library .note-entry.collapsed .expander .prompt-open {
+    display: initial;
+}
+
+#library .note-entry.collapsed .expander .prompt-close {
+    display: none;
+}
+
+#library .note-entry:not(.collapsed) .expander .prompt-open {
+    display: none;
+}
+
+#library .note-entry:not(.collapsed) .expander .prompt-close {
+    display: initial;
+}
+
 #library .note-entry .description {
     word-break: break-word;
     text-wrap: wrap;

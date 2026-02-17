@@ -5,10 +5,8 @@ namespace App\Repository;
 use App\Entity\Note;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
-use Doctrine\ORM\Tools\Pagination\CountWalker;
 
 /**
  * @extends ServiceEntityRepository<Note>
