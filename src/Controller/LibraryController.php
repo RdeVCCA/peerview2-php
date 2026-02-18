@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use App\Entity\Note;
+use App\Entity\NoteSubject;
 use App\Repository\NoteRepository;
 
 #[Route('/library')]
@@ -25,8 +26,8 @@ final class LibraryController extends AbstractController
             ->groupBy('n.id')
             ->orderBy('n.id', 'ASC')
             ->select(
-                'n.id', 'n.title', 'n.description', 'n.timeCreated', 'n.isFile', 'n.link',
-                'a.username', 'COUNT(a.id) AS authorCount', 'COUNT(DISTINCT c.id) AS commentCount', 'COUNT(DISTINCT r.id) AS ratingCount', 'AVG(r.rating) AS rating'
+                'n.id', 'n.title', 'n.description', 'n.timeCreated', 'n.isFile', 'n.link', 'n.topics', 'n.subjects',
+                'a.username', 'COUNT(DISTINCT a.id) AS authorCount', 'COUNT(DISTINCT c.id) AS commentCount', 'COUNT(DISTINCT r.id) AS ratingCount', 'AVG(r.rating) AS rating'
             )
         ;
 
@@ -44,6 +45,17 @@ final class LibraryController extends AbstractController
                 // determine website domain
                 $notes[$idx]['hostName'] = parse_url($note['link'], PHP_URL_HOST);
             }
+
+            $notes[$idx]['shortSubjects'] = match (count($note['subjects'])) {
+                0 => '<i>(none)</i>',
+                1 => $note['subjects'][0]->toReadableString(),
+                default => $note['subjects'][0]->toReadableString() . ' +' . count($note['subjects']) - 1,
+            };
+
+            $notes[$idx]['subjects'] = implode(', ', array_map(
+                fn (NoteSubject $subject): string => $subject->toReadableString(),
+                $note['subjects']
+            ));
         }
 
         if ($request->isXmlHttpRequest()) {

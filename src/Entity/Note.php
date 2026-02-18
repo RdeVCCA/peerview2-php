@@ -78,6 +78,62 @@ enum NoteSubject: string
     case JCProjectWorkH1 = 'JCProjectWorkH1';
     case OtherSubject = 'OtherSubject';
     case NonAcademic = 'NonAcademic';
+
+    public function toReadableString(): string
+    {
+        return match ($this) {
+            NoteSubject::SecCID => 'CID',
+            NoteSubject::SecArt => 'Art',
+            NoteSubject::SecAppreciationOfChineseCulture => 'ACC',
+            NoteSubject::SecMusic => 'Music',
+            NoteSubject::SecDigitalLiteracy => 'Digital Literacy',
+            NoteSubject::SecConversationalMalay => 'Conversational Malay',
+            NoteSubject::SecFoodAndConsumerEducation => 'FCE',
+            NoteSubject::SecPhysicalEducation => 'PE',
+            NoteSubject::SecMathematics => 'Math',
+            NoteSubject::SecBiology => 'Biology',
+            NoteSubject::SecBiologyTalent => 'Bio. Talent',
+            NoteSubject::SecChemistry => 'Chemistry',
+            NoteSubject::SecChemistryTalent => 'Chem. Talent',
+            NoteSubject::SecPhysics => 'Physics',
+            NoteSubject::SecPhysicsTalent => 'Phy. Talent',
+            NoteSubject::SecComputing => 'Computing',
+            NoteSubject::SecEnglishLanguage => 'English',
+            NoteSubject::SecEnglishLiterature => 'E. Lit.',
+            NoteSubject::SecHigherChineseLanguage => 'HCL',
+            NoteSubject::SecChineseLiterature => 'C. Lit.',
+            NoteSubject::SecGeography => 'Geography',
+            NoteSubject::SecHistory => 'History',
+            NoteSubject::SecSingaporeStudies => 'SS',
+            NoteSubject::SecBiculturalStudies => 'Bicul.',
+            NoteSubject::JCChinaStudiesInChineseH2 => 'H2 CSC',
+            NoteSubject::JCChineseLanguageAndLiteratureH2 => 'H2 CLL',
+            NoteSubject::JCEnglishLiteratureH1 => 'H1 E. Lit.',
+            NoteSubject::JCEnglishLiteratureH2 => 'H2 E. Lit.',
+            NoteSubject::JCEconomicsH1 => 'H1 Economics',
+            NoteSubject::JCEconomicsH2 => 'H2 Economics',
+            NoteSubject::JCGeographyH2 => 'H2 Geography',
+            NoteSubject::JCHistoryH2 => 'H2 History',
+            NoteSubject::JCTranslationH2 => 'H2 Translation',
+            NoteSubject::JCBiologyH2 => 'H2 Biology',
+            NoteSubject::JCComputingH2 => 'H2 Computing',
+            NoteSubject::JCChemistryH1 => 'H1 Chemistry',
+            NoteSubject::JCChemistryH2 => 'H2 Chemistry',
+            NoteSubject::JCChemistryH3 => 'H3 Chemistry',
+            NoteSubject::JCFurtherMathematicsH2 => 'H2 F. Math.',
+            NoteSubject::JCPhysicsH2 => 'H2 Physics',
+            NoteSubject::JCPhysicsH3 => 'H3 Physics',
+            NoteSubject::JCMathematicsH1 => 'H1 Math.',
+            NoteSubject::JCMathematicsH2 => 'H2 Math.',
+            NoteSubject::JCMathematicsH3 => 'H3 Math.',
+            NoteSubject::JCGeneralPaperH1 => 'H1 GP',
+            NoteSubject::JCMotherTongueH1 => 'H1 Mother Tongue',
+            NoteSubject::JCProjectWorkH1 => 'H1 PW',
+            NoteSubject::OtherSubject => 'Other',
+            NoteSubject::NonAcademic => 'Non-academic',
+            default => '',
+        };
+    }
 }
 
 #[ORM\Entity(repositoryClass: NoteRepository::class)]

@@ -6,7 +6,18 @@
 
 #library .note-entry {
     padding: 10px;
+}
+
+#library .note-entry.collapsed {
     border: 2px dashed var(--gray);
+}
+
+#library .note-entry:not(.collapsed) {
+    border: 2px solid black;
+}
+
+#library .note-entry>* {
+    margin: 5px 0;
 }
 
 #library .note-entry .title-row {
@@ -43,7 +54,23 @@
     display: initial;
 }
 
+#library .note-entry.collapsed .topics {
+    display: none;
+}
+
+#library .note-entry:not(.collapsed) .topics {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+#library .note-entry .topics .topic {
+    border: 2px solid black;
+    padding: 0 5px;
+}
+
 #library .note-entry .description {
+    margin: 20px 0;
     word-break: break-word;
     text-wrap: wrap;
 }
@@ -74,13 +101,14 @@
 
 #library .note-entry.collapsed .details {
     width: 100%;
-    display: flex;
-    align-items: center;
-    gap: 5px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
 }
 
 #library .note-entry.collapsed .details .short-detail {
-    display: contents;
+    display: flex;
+    align-items: center;
+    gap: 5px;
 }
 
 #library .note-entry.collapsed .details .long-detail {

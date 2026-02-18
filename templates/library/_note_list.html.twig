@@ -9,8 +9,18 @@
             <span class="prompt-close">{{ ux_icon('lucide:chevron-up') }}</span>
         </button>
     </div>
-    <!-- tags -->
+    <div class="topics">
+        {% for topic in note.topics|split(',') %}
+        {% if topic|trim != '' %}
+        <div class="topic">
+            <span>{{ topic|trim|e }}</span>
+        </div>
+        {% endif %}
+        {% endfor %}
+    </div>
+    {% if note.description|trim != '' %}
     <p class="description">{{ note.description|e }}</p>
+    {% endif %}
     <hr>
     <div class="details">
         <div class="short-detail">
@@ -35,6 +45,13 @@
         </div>
 
         <div class="short-detail">
+            {{ ux_icon('lucide:book-open') }} {{ note.shortSubjects }}
+        </div>
+        <div class="long-detail">
+            {{ ux_icon('lucide:book-open') }} {{ note.subjects }}
+        </div>
+
+        <div class="short-detail">
             {% if note.rating is null %}
             {{ ux_icon('lucide:star') }} <i>(none)</i>
             {% else %}
@@ -51,9 +68,9 @@
             {% endif %}
         </div>
 
-        <div class="short-detail">
+        {# <div class="short-detail">
             {{ ux_icon('lucide:message-square-text') }} {{ note.commentCount }}
-        </div>
+        </div> #}
         <div class="long-detail">
             {% if note.commentCount == 1 %}
             {{ ux_icon('lucide:message-square-text') }} 1 comment
@@ -69,13 +86,13 @@
             {{ ux_icon('lucide:calendar-clock') }} {{ note.timeCreated|format_datetime('short', locale: 'en-SG') }}
         </div>
 
-        <div class="short-detail">
+        {# <div class="short-detail">
             {% if note.isFile %}
             {{ ux_icon('lucide:circle-question-mark') }} {{ note.fileType }}
             {% else %}
             {{ ux_icon('lucide:circle-question-mark') }} {{ note.hostName }}
             {% endif %}
-        </div>
+        </div> #}
         <div class="long-detail">
             {% if note.isFile %}
             {{ ux_icon('lucide:circle-question-mark') }} File ({{ note.fileType }})

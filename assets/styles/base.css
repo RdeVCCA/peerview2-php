@@ -6,6 +6,7 @@
     --light-red: #f8e0e0;
     --light-blue: #e1e5f7;
     --gray: #d5d5d5;
+    --dark-gray: #3b3b3b;
 }
 
 * {
@@ -75,7 +76,7 @@ th {
 }
 
 #topbar * {
-    pointer-events: all;
+    pointer-events: auto;
 }
 
 #topbar #navigation-menu-button {
@@ -151,19 +152,11 @@ th {
 
 #navigation-menu-shadow.opened {
     opacity: 20%;
-    pointer-events: all;
+    pointer-events: auto;
     animation: navigation-menu-shadow-open 0.2s 1;
 }
 
 #navigation-menu-shadow.closed {
     opacity: 0;
     animation: navigation-menu-shadow-close 0.2s 1;
-}
-
-#navigation-menu table {
-    width: 100%;
-}
-
-#navigation-menu table td {
-    text-align: center;
 }
