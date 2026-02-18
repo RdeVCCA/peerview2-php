@@ -23,42 +23,42 @@
     {% endif %}
     <hr>
     <div class="details">
-        <div class="short-detail">
+        <div class="short-detail username">
             {% if note.username|length == 0 %}
             {{ ux_icon('lucide:user') }} <i>(none)</i>
             {% elseif note.authorCount == 1 %}
-            {{ ux_icon('lucide:user') }} {{ note.username }}
+            {{ ux_icon('lucide:user') }} {{ note.username|e }}
             {% else %}
-            {{ ux_icon('lucide:user') }} {{ note.username }} +{{ note.authorCount - 1 }}
+            {{ ux_icon('lucide:user') }} {{ note.username|e }} +{{ note.authorCount - 1 }}
             {% endif %}
         </div>
-        <div class="long-detail">
+        <div class="long-detail username">
             {% if note.username|length == 0 %}
             {{ ux_icon('lucide:user') }} <i>(none)</i>
             {% elseif note.authorCount == 1 %}
-            {{ ux_icon('lucide:user') }} {{ note.username }}
+            {{ ux_icon('lucide:user') }} {{ note.username|e }}
             {% elseif note.authorCount == 2 %}
-            {{ ux_icon('lucide:user') }} {{ note.username }} and {{ note.authorCount - 1 }} more author
+            {{ ux_icon('lucide:user') }} {{ note.username|e }} and {{ note.authorCount - 1 }} more author
             {% else %}
-            {{ ux_icon('lucide:user') }} {{ note.username }} and {{ note.authorCount - 1 }} more authors
+            {{ ux_icon('lucide:user') }} {{ note.username|e }} and {{ note.authorCount - 1 }} more authors
             {% endif %}
         </div>
 
-        <div class="short-detail">
+        <div class="short-detail subjects">
             {{ ux_icon('lucide:book-open') }} {{ note.shortSubjects }}
         </div>
-        <div class="long-detail">
+        <div class="long-detail subjects">
             {{ ux_icon('lucide:book-open') }} {{ note.subjects }}
         </div>
 
-        <div class="short-detail">
+        <div class="short-detail rating">
             {% if note.rating is null %}
             {{ ux_icon('lucide:star') }} <i>(none)</i>
             {% else %}
             {{ ux_icon('lucide:star') }} {{ note.rating|round(2) }}
             {% endif %}
         </div>
-        <div class="long-detail">
+        <div class="long-detail rating">
             {% if note.rating is null %}
             {{ ux_icon('lucide:star') }} <i>(none)</i>
             {% elseif note.ratingCount == 1 %}
@@ -68,10 +68,10 @@
             {% endif %}
         </div>
 
-        {# <div class="short-detail">
+        {# <div class="short-detail comments">
             {{ ux_icon('lucide:message-square-text') }} {{ note.commentCount }}
         </div> #}
-        <div class="long-detail">
+        <div class="long-detail comments">
             {% if note.commentCount == 1 %}
             {{ ux_icon('lucide:message-square-text') }} 1 comment
             {% else %}
@@ -79,21 +79,21 @@
             {% endif %}
         </div>
 
-        <div class="short-detail">
+        <div class="short-detail time-added">
             {{ ux_icon('lucide:calendar-clock') }} {{ note.timeCreated|format_date('short', locale: 'en-SG') }}
         </div>
-        <div class="long-detail">
+        <div class="long-detail time-added">
             {{ ux_icon('lucide:calendar-clock') }} {{ note.timeCreated|format_datetime('short', locale: 'en-SG') }}
         </div>
 
-        {# <div class="short-detail">
+        {# <div class="short-detail info">
             {% if note.isFile %}
             {{ ux_icon('lucide:circle-question-mark') }} {{ note.fileType }}
             {% else %}
             {{ ux_icon('lucide:circle-question-mark') }} {{ note.hostName }}
             {% endif %}
         </div> #}
-        <div class="long-detail">
+        <div class="long-detail info">
             {% if note.isFile %}
             {{ ux_icon('lucide:circle-question-mark') }} File ({{ note.fileType }})
             {% else %}

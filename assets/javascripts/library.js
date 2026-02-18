@@ -20,6 +20,7 @@ const observer = new IntersectionObserver(async (entries, observer) => {
     const html = await response.text();
     if (html.trim() === "") {
         observer.disconnect();
+        loader.classList.add("finished");
         return;
     }
 

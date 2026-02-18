@@ -87,7 +87,7 @@ enum NoteSubject: string
             NoteSubject::SecAppreciationOfChineseCulture => 'ACC',
             NoteSubject::SecMusic => 'Music',
             NoteSubject::SecDigitalLiteracy => 'Digital Literacy',
-            NoteSubject::SecConversationalMalay => 'Conversational Malay',
+            NoteSubject::SecConversationalMalay => 'Conv. Malay',
             NoteSubject::SecFoodAndConsumerEducation => 'FCE',
             NoteSubject::SecPhysicalEducation => 'PE',
             NoteSubject::SecMathematics => 'Math',
